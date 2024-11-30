@@ -10,6 +10,7 @@ import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import io.github.spigotrce.common.messaging.MessagingConstants;
 import io.github.spigotrce.common.messaging.PacketFactory;
 import io.github.spigotrce.velocity.database.PlayerDatabase;
+import io.github.spigotrce.velocity.misc.NickManager;
 import org.slf4j.Logger;
 
 import java.nio.file.Path;
@@ -31,6 +32,8 @@ public class VelocityEngine {
 
     public static PlayerDatabase PLAYER_DATABASE;
 
+    public static NickManager NICK_MANAGER;
+
     @Inject
     public static Logger LOGGER;
     @Inject
@@ -47,6 +50,7 @@ public class VelocityEngine {
         PROXY_SERVER = proxyServer;
         CONFIG = new Config(DATA_DIRECTORY);
         PLAYER_DATABASE = new PlayerDatabase(LOGGER);
+        NICK_MANAGER = new NickManager();
     }
 
     @Subscribe
