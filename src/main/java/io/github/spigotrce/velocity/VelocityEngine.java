@@ -10,6 +10,7 @@ import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import io.github.spigotrce.common.messaging.MessagingConstants;
 import io.github.spigotrce.common.messaging.PacketFactory;
 import io.github.spigotrce.velocity.database.PlayerDatabase;
+import io.github.spigotrce.velocity.listener.impl.PlayerConnectionListener;
 import io.github.spigotrce.velocity.misc.NickManager;
 import org.slf4j.Logger;
 
@@ -51,6 +52,8 @@ public class VelocityEngine {
         CONFIG = new Config(DATA_DIRECTORY);
         PLAYER_DATABASE = new PlayerDatabase(LOGGER);
         NICK_MANAGER = new NickManager();
+
+        new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
     }
 
     @Subscribe
