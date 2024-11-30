@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Config extends ConfigProvider {
-    public Config(String fileName, Path dataDirectory) {
-        super(fileName, "file-version", dataDirectory.toFile());
+    public Config(Path dataDirectory) {
+        super("config_velocity.yml", "file-version", dataDirectory.toFile());
     }
 
     public String getDatabaseHost() {

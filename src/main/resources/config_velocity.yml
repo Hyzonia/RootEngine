@@ -1,0 +1,53 @@
+file-version: 1
+database:
+  host: ""
+  port: 3306
+  name: ""
+  username: ""
+  password: ""
+
+balancer:
+  hub:
+    - "eu-hub-1"
+    - "eu-hub-2"
+
+self-send:
+  servers:
+    - "hub"
+    - "eu-crystal"
+    - "eu-lifesteal"
+    - "eu-practice"
+
+report:
+  webhook: ""
+  types:
+    CHEATING:
+      description: "Using hacks, mods, or exploits to gain an unfair advantage."
+      exception: "Anarchy servers."
+    CHAT_ABUSE:
+      description: "Harassment, hate speech, or inappropriate language in chat."
+      exception: "Anarchy servers."
+    BUG_ABUSE:
+      description: "Exploiting game bugs for personal advantage."
+      exception: "None, except dupes in anarchy servers."
+    SPAMMING:
+      description: "Repeatedly sending unnecessary or disruptive messages."
+      exception: "None."
+    IMPERSONATION:
+      description: "Pretending to be another player or staff member."
+      exception: "None."
+    SCAMMING:
+      description: "Attempting to defraud other players."
+      exception: "LifeSteal and anarchy servers."
+    TOXICITY:
+      description: "Consistently exhibiting rude or disruptive behavior."
+      exception: "None."
+    INAPPROPRIATE_NAME:
+      description: "Using an offensive or unsuitable player name."
+      exception: "None."
+    OFFENSIVE_SKIN:
+      description: "Wearing an offensive or inappropriate character skin."
+      exception: "None."
+    OFFENSIVE_PAINTING:
+      description: "Using an offensive or inappropriate character painting."
+      exception: "None."
