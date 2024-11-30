@@ -1,5 +1,6 @@
 # Compiled class file
 *.class
+target
 
 # Log file
 *.log
@@ -32,6 +33,7 @@ cmake-build-*/
 # IntelliJ
 out/
 .idea/
+*.iml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 com_crashlytics_export_strings.xml
