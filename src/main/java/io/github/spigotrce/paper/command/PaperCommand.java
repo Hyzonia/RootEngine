@@ -30,7 +30,7 @@ public abstract class PaperCommand implements CommandExecutor, TabCompleter {
             Field commandMapField = getServer().getClass().getDeclaredField("commandMap");
             commandMapField.setAccessible(true);
             CommandMap commandMap = (CommandMap) commandMapField.get(getServer());
-            commandMap.register("core-spigot", command);
+            commandMap.register("rootengine", command);
             getLogger().info("Registered command " + getName());
         } catch (Exception e) {
             getLogger().severe("Error creating command " + command.getName());
