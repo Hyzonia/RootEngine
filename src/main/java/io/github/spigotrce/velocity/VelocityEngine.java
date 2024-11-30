@@ -6,6 +6,8 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
+import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
+import io.github.spigotrce.common.messaging.MessagingConstants;
 import io.github.spigotrce.common.messaging.PacketFactory;
 import org.slf4j.Logger;
 
@@ -24,6 +26,8 @@ public class VelocityEngine {
     public static VelocityEngine INSTANCE;
 
     public static PacketFactory PACKET_FACTORY;
+    public static Config CONFIG;
+
     @Inject
     public static Logger LOGGER;
     @Inject
@@ -38,6 +42,7 @@ public class VelocityEngine {
         LOGGER = logger;
         DATA_DIRECTORY = dataDirectory;
         PROXY_SERVER = proxyServer;
+        CONFIG = new Config(DATA_DIRECTORY);
     }
 
     @Subscribe
