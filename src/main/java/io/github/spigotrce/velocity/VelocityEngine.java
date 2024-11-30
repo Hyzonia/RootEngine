@@ -3,6 +3,7 @@ package io.github.spigotrce.velocity;
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
+import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import io.github.spigotrce.common.messaging.PacketFactory;
@@ -10,6 +11,15 @@ import org.slf4j.Logger;
 
 import java.nio.file.Path;
 
+@Plugin(id = "rootengine",
+        name = "RootEngine",
+        version = "1.0",
+        authors = "SpigotRCE",
+        description = "A Minecraft network core.",
+        dependencies = {
+        },
+        url = "https://github.com/SpigotRCE/RootEngine"
+)
 public class VelocityEngine {
     public static VelocityEngine INSTANCE;
 

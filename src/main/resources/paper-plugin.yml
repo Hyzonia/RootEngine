@@ -1,0 +1,19 @@
+name: RootEngine
+version: '${project.version}'
+main: io.github.spigotrce.paper.PaperEngine
+description: 'A Minecraft network core.'
+website: 'https://github.com/SpigotRCE/PaperEngine'
+
+load: STARTUP
+author: 'SpigotRCE'
+
+dependencies:
+  server:
+    LuckPerms:
+      load: BEFORE
+      required: true
+      join-classpath: true
+    PlaceholderAPI:
+      load: BEFORE
+      required: true
+      join-classpath: true
