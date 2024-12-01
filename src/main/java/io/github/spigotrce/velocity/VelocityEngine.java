@@ -52,12 +52,15 @@ public class VelocityEngine {
         CONFIG = new Config(DATA_DIRECTORY);
         PLAYER_DATABASE = new PlayerDatabase(LOGGER);
         NICK_MANAGER = new NickManager();
-
-        new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
     }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         LOGGER.info("Starting VelocityEngine");
+        registerListeners();
+    }
+
+    private void registerListeners() {
+        new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
     }
 }
