@@ -18,6 +18,7 @@ import io.github.spigotrce.common.messaging.impl.CommandForwardPacket;
 import io.github.spigotrce.common.messaging.impl.HandshakePacket;
 import io.github.spigotrce.common.messaging.impl.HandshakeResponsePacket;
 import io.github.spigotrce.common.messaging.impl.NickUpdatePacket;
+import io.github.spigotrce.velocity.command.misc.ReportCommand;
 import io.github.spigotrce.velocity.database.PlayerDatabase;
 import io.github.spigotrce.velocity.database.ReportDatabase;
 import io.github.spigotrce.velocity.listener.impl.PlayerConnectionListener;
@@ -110,5 +111,9 @@ public class VelocityEngine {
 
     private void registerListeners() {
         new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
+    }
+
+    private void registerCommands() {
+        new ReportCommand();
     }
 }
