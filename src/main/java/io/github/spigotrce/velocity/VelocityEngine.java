@@ -19,6 +19,7 @@ import io.github.spigotrce.common.messaging.impl.HandshakePacket;
 import io.github.spigotrce.common.messaging.impl.HandshakeResponsePacket;
 import io.github.spigotrce.common.messaging.impl.NickUpdatePacket;
 import io.github.spigotrce.velocity.database.PlayerDatabase;
+import io.github.spigotrce.velocity.database.ReportDatabase;
 import io.github.spigotrce.velocity.listener.impl.PlayerConnectionListener;
 import io.github.spigotrce.velocity.misc.BackendServer;
 import io.github.spigotrce.velocity.misc.NickManager;
@@ -43,6 +44,7 @@ public class VelocityEngine {
     public static Config CONFIG;
 
     public static PlayerDatabase PLAYER_DATABASE;
+    public static ReportDatabase REPORT_DATABASE;
 
     public static NickManager NICK_MANAGER;
 
@@ -64,6 +66,7 @@ public class VelocityEngine {
         PROXY_SERVER = proxyServer;
         CONFIG = new Config(DATA_DIRECTORY);
         PLAYER_DATABASE = new PlayerDatabase(LOGGER);
+        REPORT_DATABASE = new ReportDatabase(LOGGER);
         NICK_MANAGER = new NickManager();
     }
 
