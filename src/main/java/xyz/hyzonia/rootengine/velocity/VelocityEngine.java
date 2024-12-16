@@ -32,6 +32,7 @@ import xyz.hyzonia.rootengine.velocity.listener.impl.VulcanAlertListener;
 import xyz.hyzonia.rootengine.velocity.misc.BackendServer;
 import xyz.hyzonia.rootengine.velocity.misc.NickManager;
 import org.slf4j.Logger;
+import xyz.hyzonia.rootengine.velocity.misc.ServerBalancer;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -58,6 +59,7 @@ public class VelocityEngine {
     public static VulcanDatabase VULCAN_DATABASE;
 
     public static NickManager NICK_MANAGER;
+    public static ServerBalancer SERVER_BALANCER;
 
     public static Map<RegisteredServer, BackendServer> BACKEND_SERVERS;
 
@@ -87,6 +89,7 @@ public class VelocityEngine {
         REPORT_DATABASE = new ReportDatabase(LOGGER);
         VULCAN_DATABASE = new VulcanDatabase(LOGGER);
         NICK_MANAGER = new NickManager();
+        SERVER_BALANCER = new ServerBalancer();
     }
 
     @Subscribe
