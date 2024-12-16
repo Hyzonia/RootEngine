@@ -74,4 +74,8 @@ public class Config extends ConfigProvider {
     public String getMaintenanceMessage() {
         return getFileConfig().getString(Route.fromString("maintenance-support.discord-message"));
     }
+
+    public boolean isVulcanSupportEnabled() {
+        return getFileConfig().getBoolean(Route.fromString("vulcan-alerts.enabled"));
+    }
 }
