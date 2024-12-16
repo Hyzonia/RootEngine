@@ -1,6 +1,6 @@
 name: RootEngine
 version: '${project.version}'
-main: io.github.spigotrce.paper.PaperEngine
+main: xyz.hyzonia.rootengine.paper.PaperEngine
 description: 'A Minecraft network core.'
 website: 'https://github.com/SpigotRCE/PaperEngine'
 
