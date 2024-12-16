@@ -122,5 +122,11 @@
             <version>2.11.6</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>eu.kennytv.maintenance</groupId>
+            <artifactId>maintenance-api-proxy</artifactId>
+            <version>4.2.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
