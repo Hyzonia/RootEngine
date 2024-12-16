@@ -87,6 +87,7 @@ public class VelocityEngine {
     public void onProxyInitialization(ProxyInitializeEvent event) {
         LOGGER.info("Starting VelocityEngine");
         registerListeners();
+        registerCommands();
         initializePacketFactory();
 
         if (CONFIG.isMaintenanceHooked() && PROXY_SERVER.getPluginManager().isLoaded("maintenance")) {
