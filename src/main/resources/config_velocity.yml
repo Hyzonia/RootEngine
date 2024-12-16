@@ -56,3 +56,6 @@ maintenance-support:
   enabled: false
   webhook: ""
   discord-message: "{server_name} is undergoing maintenance! ETA: {eta}."
+
+vulcan-alerts:
+  enabled: false
