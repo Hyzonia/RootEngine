@@ -14,6 +14,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.hyzonia.rootengine.paper.listener.LPCListener;
 
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -40,6 +41,8 @@ public class PaperEngine extends JavaPlugin {
         LOGGER.info("Starting PaperEngine");
 
         initializePacketFactory();
+
+        new LPCListener(this, getServer(), getLogger());
     }
 
     @Override
