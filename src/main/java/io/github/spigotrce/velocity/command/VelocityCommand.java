@@ -17,7 +17,7 @@ public abstract class VelocityCommand {
     /**
      * Constructs a new Command instance and registers the command with the server's CommandMap.
      *
-     * @param commandName     The name of the command.
+     * @param commandName    The name of the command.
      * @param commandAliases The command aliases.
      */
     public VelocityCommand(String commandName, String... commandAliases) {

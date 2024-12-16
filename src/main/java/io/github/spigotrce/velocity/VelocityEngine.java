@@ -101,7 +101,8 @@ public class VelocityEngine {
 
         PROXY_SERVER.getChannelRegistrar().register(MinecraftChannelIdentifier.from(MessagingConstants.ENGINE_CHANNEL.channelName));
         PROXY_SERVER.getEventManager().register(this, PluginMessageEvent.class, PostOrder.NORMAL, event -> {
-            if (!event.getIdentifier().equals(MinecraftChannelIdentifier.from(MessagingConstants.ENGINE_CHANNEL.channelName))) return;
+            if (!event.getIdentifier().equals(MinecraftChannelIdentifier.from(MessagingConstants.ENGINE_CHANNEL.channelName)))
+                return;
             event.setResult(PluginMessageEvent.ForwardResult.handled());
             if (event.getSource() instanceof Player) return;
 

@@ -7,7 +7,6 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.velocitypowered.api.command.BrigadierCommand;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
-import com.velocitypowered.api.proxy.ProxyServer;
 import io.github.spigotrce.common.DiscordWebhookSender;
 import io.github.spigotrce.common.Messages;
 import io.github.spigotrce.velocity.VelocityEngine;
@@ -15,7 +14,6 @@ import io.github.spigotrce.velocity.command.VelocityCommand;
 import io.github.spigotrce.velocity.database.ReportDatabase;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
-import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

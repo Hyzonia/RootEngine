@@ -1,7 +1,6 @@
 package io.github.spigotrce.velocity.misc;
 
 import com.velocitypowered.api.proxy.Player;
-import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import io.github.spigotrce.velocity.VelocityEngine;
 
