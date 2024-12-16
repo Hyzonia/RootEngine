@@ -1,0 +1,14 @@
+file-version: 1
+chat:
+  # Placeholders:
+  # {message} – the chat message
+  # {name} – the player's name
+  # {displayname} – the player's display name / nickname
+  # {world} – the world name of the player's current world
+  # {prefix} – the player's highest priority prefix
+  # {suffix} – the player's highest priority suffix
+  # {prefixes} – the player's prefixes sorted by the highest priority
+  # {suffixes} – the player's suffixes sorted by the highest priority
+  # {username-color} – the player's or the group's username color
+  # {message-color} – the player's or the group's message color
+  format: "{prefix}{displayname}&r ➠ {message}"
