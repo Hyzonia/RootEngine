@@ -62,4 +62,16 @@ public class Config extends ConfigProvider {
     public List<String> getSelfSendServers() {
         return getFileConfig().getStringList(Route.fromString("self-send.servers"));
     }
+
+    public boolean isMaintenanceHooked() {
+        return getFileConfig().getBoolean(Route.fromString("maintenance-support.enabled"));
+    }
+
+    public String getMaintenanceWebhook() {
+        return getFileConfig().getString(Route.fromString("maintenance-support.webhook"));
+    }
+
+    public String getMaintenanceMessage() {
+        return getFileConfig().getString(Route.fromString("maintenance-support.discord-message"));
+    }
 }
