@@ -22,6 +22,7 @@ public class PaperEngine extends JavaPlugin {
     public static PaperEngine INSTANCE;
     public static Logger LOGGER;
     public static Path DATA_DIRECTORY;
+    public static Config CONFIG;
     public static Server SERVER;
     public static PacketFactory PACKET_FACTORY;
 
@@ -33,6 +34,7 @@ public class PaperEngine extends JavaPlugin {
     public void onEnable() {
         LOGGER = getLogger();
         DATA_DIRECTORY = getDataFolder().toPath();
+        CONFIG = new Config(getDataFolder().toPath());
         SERVER = getServer();
 
         LOGGER.info("Starting PaperEngine");
