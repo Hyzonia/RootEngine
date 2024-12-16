@@ -33,6 +33,7 @@ import xyz.hyzonia.rootengine.velocity.misc.BackendServer;
 import xyz.hyzonia.rootengine.velocity.misc.NickManager;
 import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -77,6 +78,11 @@ public class VelocityEngine {
         DATA_DIRECTORY = dataDirectory;
         PROXY_SERVER = proxyServer;
         CONFIG = new Config(DATA_DIRECTORY);
+        try {
+            CONFIG.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         PLAYER_DATABASE = new PlayerDatabase(LOGGER);
         REPORT_DATABASE = new ReportDatabase(LOGGER);
         VULCAN_DATABASE = new VulcanDatabase(LOGGER);
