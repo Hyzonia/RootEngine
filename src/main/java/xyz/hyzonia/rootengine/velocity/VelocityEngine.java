@@ -130,6 +130,16 @@ public class VelocityEngine {
 
     private void registerListeners() {
         new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
+        if (CONFIG.isVulcanSupportEnabled()) {
+            PROXY_SERVER.getChannelRegistrar().register(MinecraftChannelIdentifier.from("vulcan:bungee"));
+            new VulcanAlertListener(PROXY_SERVER, INSTANCE, LOGGER);
+            LOGGER.info("Hooked in vulcan proxy!");
+            if (!PROXY_SERVER.getPluginManager().isLoaded("vulcan")) {
+                LOGGER.warn("Vulcan bungee/velocity plugin is not loaded, the hook will continue to work and store logs in the database but will not send global alerts!");
+                LOGGER.warn("To get global alerts you must install the Vulcan bungee/velocity plugin!");
+                LOGGER.warn("If you have Vulcan bungee/velocity installed and sure that this is a bug, contact us at https://github.com/Hyzonia");
+            }
+        }
     }
 
     private void registerCommands() {
