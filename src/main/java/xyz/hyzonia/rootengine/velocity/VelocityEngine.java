@@ -5,6 +5,7 @@ import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PluginMessageEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
+import com.velocitypowered.api.plugin.Dependency;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.Player;
@@ -12,6 +13,9 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.ServerConnection;
 import com.velocitypowered.api.proxy.messages.MinecraftChannelIdentifier;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
+import eu.kennytv.maintenance.api.MaintenanceProvider;
+import eu.kennytv.maintenance.api.event.MaintenanceChangedEvent;
+import eu.kennytv.maintenance.api.proxy.MaintenanceProxy;
 import xyz.hyzonia.rootengine.common.messaging.MessagingConstants;
 import xyz.hyzonia.rootengine.common.messaging.PacketFactory;
 import xyz.hyzonia.rootengine.common.messaging.impl.CommandForwardPacket;
@@ -21,6 +25,7 @@ import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import xyz.hyzonia.rootengine.velocity.command.misc.ReportCommand;
 import xyz.hyzonia.rootengine.velocity.database.PlayerDatabase;
 import xyz.hyzonia.rootengine.velocity.database.ReportDatabase;
+import xyz.hyzonia.rootengine.velocity.listener.impl.MaintenanceListener;
 import xyz.hyzonia.rootengine.velocity.listener.impl.PlayerConnectionListener;
 import xyz.hyzonia.rootengine.velocity.misc.BackendServer;
 import xyz.hyzonia.rootengine.velocity.misc.NickManager;
@@ -35,6 +40,7 @@ import java.util.Map;
         authors = "SpigotRCE",
         description = "A Minecraft network core.",
         dependencies = {
+                @Dependency(id = "maintenance", optional = true)
         },
         url = "https://github.com/SpigotRCE/RootEngine"
 )
@@ -50,6 +56,8 @@ public class VelocityEngine {
     public static NickManager NICK_MANAGER;
 
     public static Map<RegisteredServer, BackendServer> BACKEND_SERVERS;
+
+    public static MaintenanceProxy MAINTENANCE_PROXY;
 
     @Inject
     public static Logger LOGGER;
@@ -76,6 +84,12 @@ public class VelocityEngine {
         LOGGER.info("Starting VelocityEngine");
         registerListeners();
         initializePacketFactory();
+
+        if (CONFIG.isMaintenanceHooked() && PROXY_SERVER.getPluginManager().isLoaded("maintenance")) {
+            MAINTENANCE_PROXY = (MaintenanceProxy) MaintenanceProvider.get();
+            MAINTENANCE_PROXY.getEventManager().registerListener(new MaintenanceListener(), MaintenanceChangedEvent.class);
+            LOGGER.info("Hooked into maintenance proxy!");
+        }
     }
 
     private void initializePacketFactory() {
