@@ -51,3 +51,8 @@ report:
     OFFENSIVE_PAINTING:
       description: "Using an offensive or inappropriate character painting."
       exception: "None."
+
+maintenance-support:
+  enabled: false
+  webhook: ""
+  discord-message: "{server_name} is undergoing maintenance! ETA: {eta}."
