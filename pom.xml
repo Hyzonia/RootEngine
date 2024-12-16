@@ -31,11 +31,11 @@
                     <relocations>
                         <relocation>
                             <pattern>dev.dejvokep.boostedyaml</pattern>
-                            <shadedPattern>io.github.spigotrce.libs.boostedyaml</shadedPattern>
+                            <shadedPattern>xyz.hyzonia.libs.boostedyaml</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>org.mariadb.jdbc</pattern>
-                            <shadedPattern>io.github.spigotrce.libs.mariadb</shadedPattern>
+                            <shadedPattern>xyz.hyzonia.libs.mariadb</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
