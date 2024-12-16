@@ -25,8 +25,10 @@ import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import xyz.hyzonia.rootengine.velocity.command.misc.ReportCommand;
 import xyz.hyzonia.rootengine.velocity.database.PlayerDatabase;
 import xyz.hyzonia.rootengine.velocity.database.ReportDatabase;
+import xyz.hyzonia.rootengine.velocity.database.VulcanDatabase;
 import xyz.hyzonia.rootengine.velocity.listener.impl.MaintenanceListener;
 import xyz.hyzonia.rootengine.velocity.listener.impl.PlayerConnectionListener;
+import xyz.hyzonia.rootengine.velocity.listener.impl.VulcanAlertListener;
 import xyz.hyzonia.rootengine.velocity.misc.BackendServer;
 import xyz.hyzonia.rootengine.velocity.misc.NickManager;
 import org.slf4j.Logger;
@@ -52,6 +54,7 @@ public class VelocityEngine {
 
     public static PlayerDatabase PLAYER_DATABASE;
     public static ReportDatabase REPORT_DATABASE;
+    public static VulcanDatabase VULCAN_DATABASE;
 
     public static NickManager NICK_MANAGER;
 
@@ -76,6 +79,7 @@ public class VelocityEngine {
         CONFIG = new Config(DATA_DIRECTORY);
         PLAYER_DATABASE = new PlayerDatabase(LOGGER);
         REPORT_DATABASE = new ReportDatabase(LOGGER);
+        VULCAN_DATABASE = new VulcanDatabase(LOGGER);
         NICK_MANAGER = new NickManager();
     }
 
