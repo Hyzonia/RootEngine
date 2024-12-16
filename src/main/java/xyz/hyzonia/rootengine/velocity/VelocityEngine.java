@@ -28,6 +28,7 @@ import xyz.hyzonia.rootengine.velocity.database.ReportDatabase;
 import xyz.hyzonia.rootengine.velocity.database.VulcanDatabase;
 import xyz.hyzonia.rootengine.velocity.listener.impl.MaintenanceListener;
 import xyz.hyzonia.rootengine.velocity.listener.impl.PlayerConnectionListener;
+import xyz.hyzonia.rootengine.velocity.listener.impl.PlayerServerListener;
 import xyz.hyzonia.rootengine.velocity.listener.impl.VulcanAlertListener;
 import xyz.hyzonia.rootengine.velocity.misc.BackendServer;
 import xyz.hyzonia.rootengine.velocity.misc.NickManager;
@@ -140,6 +141,7 @@ public class VelocityEngine {
 
     private void registerListeners() {
         new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
+        new PlayerServerListener(PROXY_SERVER, INSTANCE, LOGGER);
         if (CONFIG.isVulcanSupportEnabled()) {
             PROXY_SERVER.getChannelRegistrar().register(MinecraftChannelIdentifier.from("vulcan:bungee"));
             new VulcanAlertListener(PROXY_SERVER, INSTANCE, LOGGER);
