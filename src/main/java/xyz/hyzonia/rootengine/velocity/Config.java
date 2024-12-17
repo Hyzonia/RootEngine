@@ -78,4 +78,8 @@ public class Config extends ConfigProvider {
     public boolean isVulcanSupportEnabled() {
         return getFileConfig().getBoolean(Route.fromString("vulcan-alerts.enabled"));
     }
+
+    public String getStaffChatWebhook() {
+        return getFileConfig().getString(Route.fromString("staff-chat.webhook"));
+    }
 }
