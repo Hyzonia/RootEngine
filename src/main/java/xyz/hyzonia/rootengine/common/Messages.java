@@ -38,4 +38,6 @@ public class Messages {
     public static final Component incompleteCommand = Component.text("§5§lNexus§d§lCraft » §7Incomplete command.").decoration(TextDecoration.ITALIC, false);
     public static final Component databaseError = Component.text("§5§lNexus§d§lCraft » §7A database error has occurred, contact a server administrator if something doesn't work.").decoration(TextDecoration.ITALIC, false);
     public static final Component fileError = Component.text("§5§lNexus§d§lCraft » §7A file error has occurred, contact a server administrator if something doesn't work.").decoration(TextDecoration.ITALIC, false);
+    public static final Component consoleUsername = Component.text("CONSOLE").decoration(TextDecoration.ITALIC, false);
+    public static final Component staffMessage = Component.text("§5§lStaff§d§lChat » §d{sender}: §7{message}");
 }
