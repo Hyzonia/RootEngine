@@ -27,7 +27,7 @@ public class StaffChat {
         });
 
         staffsWithChatToggled.forEach(player -> {
-            if (!player.hasPermission("rootengine.staffchat.toggle"))
+            if (!player.hasPermission("rootengine.staffchat"))
                 staffsWithChatToggled.remove(player);
         });
     }
