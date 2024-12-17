@@ -2,7 +2,9 @@ package xyz.hyzonia.rootengine.velocity.misc;
 
 import com.velocitypowered.api.proxy.Player;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import xyz.hyzonia.rootengine.common.DiscordWebhookSender;
+import xyz.hyzonia.rootengine.common.Messages;
 import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 
 import java.io.IOException;
@@ -17,11 +19,23 @@ public class StaffChat {
         staffsWithChatToggled = new ArrayList<>();
     }
 
-    public void broadcastStaffMessage(Component message) {
-        staffsWithChatEnabled.forEach(player -> player.sendMessage(message));
-        VelocityEngine.PROXY_SERVER.getConsoleCommandSource().sendMessage(message);
+    public void broadcastStaffMessage(Component senderName, Component message) {
+        Component component = Messages.staffMessage
+                .replaceText(TextReplacementConfig.builder()
+                        .matchLiteral("{sender}")
+                        .replacement(senderName)
+                        .build()
+                )
+                .replaceText(TextReplacementConfig.builder()
+                        .matchLiteral("{message}")
+                        .replacement(message)
+                        .build()
+                );
+
+        staffsWithChatEnabled.forEach(player -> player.sendMessage(component));
+        VelocityEngine.PROXY_SERVER.getConsoleCommandSource().sendMessage(component);
         try {
-            new DiscordWebhookSender(VelocityEngine.CONFIG.getStaffChatWebhook()).sendMessage(message.toString());
+            new DiscordWebhookSender(VelocityEngine.CONFIG.getStaffChatWebhook()).sendMessage(component.toString());
         } catch (IOException e) {
             VelocityEngine.LOGGER.error("Error while posting to Discord staff chat", e);
         }

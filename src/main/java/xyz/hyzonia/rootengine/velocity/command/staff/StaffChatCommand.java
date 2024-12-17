@@ -37,18 +37,10 @@ public class StaffChatCommand extends VelocityCommand {
                     return SINGLE_SUCCESS;
                 })
                 .then(RequiredArgumentBuilder.<CommandSource, String>argument("message", StringArgumentType.word()).executes(commandContext -> {
-                    Component senderName = commandContext.getSource() instanceof Player player ? Component.text(player.getUsername()) : Messages.consoleUsername;
-                    String message = commandContext.getArgument("message", String.class);
-                    VelocityEngine.STAFF_CHAT.broadcastStaffMessage(Messages.staffMessage
-                            .replaceText(TextReplacementConfig.builder()
-                                    .matchLiteral("{sender}")
-                                    .replacement(senderName)
-                                    .build()
-                            )
-                            .replaceText(TextReplacementConfig.builder()
-                                    .matchLiteral("{message}")
-                                    .replacement(message)
-                                    .build()
+                    VelocityEngine.STAFF_CHAT.broadcastStaffMessage(
+                            commandContext.getSource() instanceof Player player ?
+                                    Component.text(player.getUsername()) : Messages.consoleUsername,
+                            Component.text(commandContext.getArgument("message", String.class)
                             )
                     );
                     return SINGLE_SUCCESS;
