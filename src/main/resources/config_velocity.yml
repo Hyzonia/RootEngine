@@ -60,5 +60,5 @@ maintenance-support:
 vulcan-alerts:
   enabled: false
 
-saff-chat:
+staff-chat:
   webhook: ""
