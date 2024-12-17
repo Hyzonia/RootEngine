@@ -16,6 +16,7 @@ import com.velocitypowered.api.proxy.server.RegisteredServer;
 import eu.kennytv.maintenance.api.MaintenanceProvider;
 import eu.kennytv.maintenance.api.event.MaintenanceChangedEvent;
 import eu.kennytv.maintenance.api.proxy.MaintenanceProxy;
+import org.bukkit.util.noise.PerlinOctaveGenerator;
 import xyz.hyzonia.rootengine.common.messaging.MessagingConstants;
 import xyz.hyzonia.rootengine.common.messaging.PacketFactory;
 import xyz.hyzonia.rootengine.common.messaging.impl.CommandForwardPacket;
@@ -98,6 +99,7 @@ public class VelocityEngine {
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
         LOGGER.info("Starting VelocityEngine");
+        checkCompatibility();
         registerListeners();
         registerCommands();
         initializePacketFactory();
@@ -107,6 +109,52 @@ public class VelocityEngine {
             MAINTENANCE_PROXY.getEventManager().registerListener(new MaintenanceListener(), MaintenanceChangedEvent.class);
             LOGGER.info("Hooked into maintenance proxy!");
         }
+    }
+
+    private void checkCompatibility() {
+        LOGGER.info("Starting compatibility check...");
+
+        if (!(PROXY_SERVER.getPluginManager().isLoaded("signedvelocity") || PROXY_SERVER.getPluginManager().isLoaded("unsignedvelocity"))) {
+            LOGGER.warn("SignedVelocity plugin is not loaded! RootEngine may not work correctly!");
+            LOGGER.warn("Please ensure that any of the plugins are installed on both proxy & server and is enabled.");
+            LOGGER.warn("If you have signedVelocity installed and sure that this is a bug, contact us at https://github.com/Hyzonia");
+        }
+
+        if (PROXY_SERVER.getPluginManager().isLoaded("cleanstaffchat")) {
+            LOGGER.warn("CleanStaffChat plugin is loaded! This may cause issues with RootEngine's staff chat.");
+            LOGGER.warn("Please ensure that CleanStaffChat is disabled or removed.");
+            LOGGER.warn("If you don't have CleanStaffChat installed and sure that this is a bug, contact us at https://github.com/Hyzonia");
+        }
+
+        if (PROXY_SERVER.getPluginManager().isLoaded("playerbalancer")) {
+            LOGGER.warn("PlayerBalancer plugin is loaded! This may cause issues with RootEngine's server balancer.");
+            LOGGER.warn("Please ensure that PlayerBalancer is disabled or removed.");
+            LOGGER.warn("If you don't have PlayerBalancer installed and sure that this is a bug, contact us at https://github.com/Hyzonia");
+        }
+
+        LOGGER.info("Compatibility check completed! If you are seeing this message without any prior warnings, the plugin should work fine without any problems!");
+    }
+
+    private void registerListeners() {
+        new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
+        new PlayerServerListener(PROXY_SERVER, INSTANCE, LOGGER);
+        new StaffChatListener(PROXY_SERVER, INSTANCE, LOGGER);
+        if (CONFIG.isVulcanSupportEnabled()) {
+            PROXY_SERVER.getChannelRegistrar().register(MinecraftChannelIdentifier.from("vulcan:bungee"));
+            new VulcanAlertListener(PROXY_SERVER, INSTANCE, LOGGER);
+            LOGGER.info("Hooked in vulcan proxy!");
+            if (!PROXY_SERVER.getPluginManager().isLoaded("vulcan")) {
+                LOGGER.warn("Vulcan bungee/velocity plugin is not loaded, the hook will continue to work and store logs in the database but will not send global alerts!");
+                LOGGER.warn("To get global alerts you must install the Vulcan bungee/velocity plugin!");
+                LOGGER.warn("If you have Vulcan bungee/velocity installed and sure that this is a bug, contact us at https://github.com/Hyzonia");
+            }
+        }
+    }
+
+    private void registerCommands() {
+        new ReportCommand();
+        new NickCommand();
+        new StaffChatCommand();
     }
 
     private void initializePacketFactory() {
@@ -139,27 +187,5 @@ public class VelocityEngine {
 
             PACKET_FACTORY.decodeAndApply(event.getData());
         });
-    }
-
-    private void registerListeners() {
-        new PlayerConnectionListener(PROXY_SERVER, INSTANCE, LOGGER);
-        new PlayerServerListener(PROXY_SERVER, INSTANCE, LOGGER);
-        new StaffChatListener(PROXY_SERVER, INSTANCE, LOGGER);
-        if (CONFIG.isVulcanSupportEnabled()) {
-            PROXY_SERVER.getChannelRegistrar().register(MinecraftChannelIdentifier.from("vulcan:bungee"));
-            new VulcanAlertListener(PROXY_SERVER, INSTANCE, LOGGER);
-            LOGGER.info("Hooked in vulcan proxy!");
-            if (!PROXY_SERVER.getPluginManager().isLoaded("vulcan")) {
-                LOGGER.warn("Vulcan bungee/velocity plugin is not loaded, the hook will continue to work and store logs in the database but will not send global alerts!");
-                LOGGER.warn("To get global alerts you must install the Vulcan bungee/velocity plugin!");
-                LOGGER.warn("If you have Vulcan bungee/velocity installed and sure that this is a bug, contact us at https://github.com/Hyzonia");
-            }
-        }
-    }
-
-    private void registerCommands() {
-        new ReportCommand();
-        new NickCommand();
-        new StaffChatCommand();
     }
 }
