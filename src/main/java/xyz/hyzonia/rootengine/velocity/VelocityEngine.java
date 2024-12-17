@@ -24,6 +24,7 @@ import xyz.hyzonia.rootengine.common.messaging.impl.HandshakeResponsePacket;
 import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import xyz.hyzonia.rootengine.velocity.command.misc.NickCommand;
 import xyz.hyzonia.rootengine.velocity.command.misc.ReportCommand;
+import xyz.hyzonia.rootengine.velocity.command.staff.StaffChatCommand;
 import xyz.hyzonia.rootengine.velocity.database.PlayerDatabase;
 import xyz.hyzonia.rootengine.velocity.database.ReportDatabase;
 import xyz.hyzonia.rootengine.velocity.database.VulcanDatabase;
@@ -161,5 +162,6 @@ public class VelocityEngine {
     private void registerCommands() {
         new ReportCommand();
         new NickCommand();
+        new StaffChatCommand();
     }
 }
