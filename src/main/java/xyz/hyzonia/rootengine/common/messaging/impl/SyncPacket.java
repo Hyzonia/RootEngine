@@ -5,9 +5,6 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import xyz.hyzonia.rootengine.common.messaging.Packet;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 public class SyncPacket extends Packet {
     private String serverName;
     private int serverPVN;
@@ -16,12 +13,13 @@ public class SyncPacket extends Packet {
     private String motd;
     private String favicon;
     private long upTime;
+    private long syncID;
 
     public SyncPacket() {
         super("sync");
     }
 
-    public SyncPacket(String serverName, int serverPVN, int onlinePlayers, int maxPlayers, String motd, String favicon, long upTime) {
+    public SyncPacket(String serverName, int serverPVN, int onlinePlayers, int maxPlayers, String motd, String favicon, long upTime, long syncID) {
         super("sync");
         this.serverName = serverName;
         this.serverPVN = serverPVN;
@@ -30,6 +28,7 @@ public class SyncPacket extends Packet {
         this.motd = motd;
         this.favicon = favicon;
         this.upTime = upTime;
+        this.syncID = syncID;
     }
 
     @Override
@@ -42,6 +41,7 @@ public class SyncPacket extends Packet {
         out.writeUTF(motd);
         out.writeUTF(favicon);
         out.writeLong(upTime);
+        out.writeLong(syncID);
         buf = out.toByteArray();
     }
 
@@ -55,6 +55,7 @@ public class SyncPacket extends Packet {
         motd = input.readUTF();
         favicon = input.readUTF();
         upTime = input.readLong();
+        syncID = input.readLong();
     }
 
     public String getServerName() {
@@ -111,5 +112,13 @@ public class SyncPacket extends Packet {
 
     public void setUpTime(long upTime) {
         this.upTime = upTime;
+    }
+
+    public long getSyncID() {
+        return syncID;
+    }
+
+    public void setSyncID(long syncID) {
+        this.syncID = syncID;
     }
 }

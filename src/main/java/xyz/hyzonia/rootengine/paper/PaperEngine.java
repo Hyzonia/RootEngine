@@ -69,7 +69,8 @@ public class PaperEngine extends JavaPlugin {
                                     getServer().getMaxPlayers(),
                                     getServer().getMotd(),
                                     getServer().getServerIcon().getData(),
-                                    System.currentTimeMillis()
+                                    System.currentTimeMillis(),
+                                    0 // Starting synchronization from ID 0
                             ),
                             player
                     )
