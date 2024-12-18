@@ -37,6 +37,11 @@ public class SyncPacket extends Packet {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF(serverName);
         out.writeInt(serverPVN);
+        out.writeInt(onlinePlayers);
+        out.writeInt(maxPlayers);
+        out.writeUTF(motd);
+        out.writeUTF(favicon);
+        out.writeLong(upTime);
         buf = out.toByteArray();
     }
 
@@ -45,6 +50,11 @@ public class SyncPacket extends Packet {
         ByteArrayDataInput input = ByteStreams.newDataInput(buf);
         serverName = input.readUTF();
         serverPVN = input.readInt();
+        onlinePlayers = input.readInt();
+        maxPlayers = input.readInt();
+        motd = input.readUTF();
+        favicon = input.readUTF();
+        upTime = input.readLong();
     }
 
     public String getServerName() {
