@@ -17,6 +17,7 @@ import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import xyz.hyzonia.rootengine.paper.listener.LPCListener;
 
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class PaperEngine extends JavaPlugin {
@@ -26,6 +27,8 @@ public class PaperEngine extends JavaPlugin {
     public static Config CONFIG;
     public static Server SERVER;
     public static PacketFactory PACKET_FACTORY;
+    public static HashMap<Player, Integer> SYNC_THREADS;
+    public static HashMap<Player, Integer> SYNC_IDS;
 
     public PaperEngine() {
         INSTANCE = this;
@@ -37,6 +40,7 @@ public class PaperEngine extends JavaPlugin {
         DATA_DIRECTORY = getDataFolder().toPath();
         CONFIG = new Config(getDataFolder().toPath());
         SERVER = getServer();
+        SYNC_THREADS = new HashMap<>();
 
         LOGGER.info("Starting PaperEngine");
 
@@ -48,31 +52,55 @@ public class PaperEngine extends JavaPlugin {
     @Override
     public void onDisable() {
         LOGGER.info("Stopping PaperEngine");
+        SYNC_THREADS.values().forEach(id -> getServer().getScheduler().cancelTask(id));
+        SYNC_THREADS.clear();
+        SYNC_IDS.clear();
     }
 
     private void initializePacketFactory() {
         PACKET_FACTORY = new PacketFactory(sender -> ((Player) sender.connection).sendPluginMessage(this, MessagingConstants.ENGINE_CHANNEL.channelName, sender.data));
 
         PACKET_FACTORY.registerPacket("handshake", HandshakePacket::new, handshakePacket -> {
-            getServer().getPlayer(handshakePacket.getPlayerUUID()).setDisplayName(handshakePacket.getPlayerNickname());
-            getServer().getPlayer(handshakePacket.getPlayerUUID()).sendMessage(Messages.DISPLAY_NAME_CHANGED.replace("{nickname}", handshakePacket.getPlayerNickname()));
+            Player player = getServer().getPlayer(handshakePacket.getPlayerUUID());
+            player.setDisplayName(handshakePacket.getPlayerNickname());
+            player.sendMessage(Messages.DISPLAY_NAME_CHANGED.replace("{nickname}", handshakePacket.getPlayerNickname()));
 
-            // Synchronize the server state with all proxies by absolutely bombarding it
-            // The bombarding part was a joke,
-            // we will later make a proxy identifier to send one packet to one proxy
-            // Or maybe use something like rabbit mq
-            getServer().getOnlinePlayers().forEach(player -> PACKET_FACTORY.encodeAndSend(
-                            new SyncPacket(
-                                    handshakePacket.getServerName(),
-                                    getServer().getUnsafe().getProtocolVersion(),
-                                    getServer().getOnlinePlayers().size(),
-                                    getServer().getMaxPlayers(),
-                                    getServer().getMotd(),
-                                    getServer().getServerIcon().getData(),
-                                    System.currentTimeMillis(),
-                                    0 // Starting synchronization from ID 0
-                            ),
-                            player
+            SYNC_IDS.put(player, 0);
+            PACKET_FACTORY.encodeAndSend(
+                    new SyncPacket(
+                            handshakePacket.getServerName(),
+                            getServer().getUnsafe().getProtocolVersion(),
+                            getServer().getOnlinePlayers().size(),
+                            getServer().getMaxPlayers(),
+                            getServer().getMotd(),
+                            getServer().getServerIcon().getData(),
+                            System.currentTimeMillis(),
+                            SYNC_IDS.get(player)
+                    ),
+                    player
+            );
+
+            SYNC_THREADS.put(player,
+                    getServer().getScheduler().scheduleSyncRepeatingTask(
+                            this,
+                            () -> {
+                                SYNC_IDS.put(player, SYNC_IDS.get(player) + 1);
+                                PACKET_FACTORY.encodeAndSend(
+                                        new SyncPacket(
+                                                handshakePacket.getServerName(),
+                                                getServer().getUnsafe().getProtocolVersion(),
+                                                getServer().getOnlinePlayers().size(),
+                                                getServer().getMaxPlayers(),
+                                                getServer().getMotd(),
+                                                getServer().getServerIcon().getData(),
+                                                System.currentTimeMillis(),
+                                                SYNC_IDS.get(player)
+                                        ),
+                                        player
+                                );
+                            },
+                            20L,
+                            20L
                     )
             );
 
@@ -82,7 +110,7 @@ public class PaperEngine extends JavaPlugin {
                             .replaceText(
                                     TextReplacementConfig.builder()
                                             .matchLiteral("{nickname}")
-                                            .replacement(getServer().getPlayer(handshakePacket.getPlayerUUID()).displayName().color(TextColor.fromHexString("#55FFFF")))
+                                            .replacement(player.displayName().color(TextColor.fromHexString("#55FFFF")))
                                             .build()
                             )
             );
