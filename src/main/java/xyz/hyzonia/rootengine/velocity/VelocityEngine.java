@@ -43,12 +43,12 @@ import java.util.Map;
 @Plugin(id = "rootengine",
         name = "RootEngine",
         version = "1.0",
-        authors = "SpigotRCE",
+        authors = "Hyzonia",
         description = "A Minecraft network core.",
         dependencies = {
                 @Dependency(id = "maintenance", optional = true)
         },
-        url = "https://github.com/SpigotRCE/RootEngine"
+        url = "https://github.com/Hyzonia/RootEngine"
 )
 public class VelocityEngine {
     public static VelocityEngine INSTANCE;
