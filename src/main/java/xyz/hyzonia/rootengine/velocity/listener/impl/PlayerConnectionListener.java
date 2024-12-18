@@ -3,11 +3,11 @@ package xyz.hyzonia.rootengine.velocity.listener.impl;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PostLoginEvent;
 import com.velocitypowered.api.proxy.ProxyServer;
+import org.slf4j.Logger;
 import xyz.hyzonia.rootengine.common.Messages;
 import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 import xyz.hyzonia.rootengine.velocity.database.PlayerDatabase;
 import xyz.hyzonia.rootengine.velocity.listener.VelocityListener;
-import org.slf4j.Logger;
 
 import java.sql.SQLException;
 import java.util.Objects;

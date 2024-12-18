@@ -1,9 +1,9 @@
 package xyz.hyzonia.rootengine.paper.command;
 
-import xyz.hyzonia.rootengine.paper.PaperEngine;
 import org.bukkit.Server;
 import org.bukkit.command.*;
 import org.jetbrains.annotations.NotNull;
+import xyz.hyzonia.rootengine.paper.PaperEngine;
 
 import java.lang.reflect.Field;
 import java.util.List;

@@ -9,7 +9,6 @@ import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.permission.Tristate;
 import com.velocitypowered.api.proxy.Player;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
 import xyz.hyzonia.rootengine.common.Messages;
 import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 import xyz.hyzonia.rootengine.velocity.command.VelocityCommand;

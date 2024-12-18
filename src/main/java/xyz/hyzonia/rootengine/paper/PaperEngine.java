@@ -1,12 +1,5 @@
 package xyz.hyzonia.rootengine.paper;
 
-import xyz.hyzonia.rootengine.common.Messages;
-import xyz.hyzonia.rootengine.common.messaging.MessagingConstants;
-import xyz.hyzonia.rootengine.common.messaging.PacketFactory;
-import xyz.hyzonia.rootengine.common.messaging.impl.CommandForwardPacket;
-import xyz.hyzonia.rootengine.common.messaging.impl.HandshakePacket;
-import xyz.hyzonia.rootengine.common.messaging.impl.HandshakeResponsePacket;
-import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.format.TextColor;
@@ -14,6 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.hyzonia.rootengine.common.Messages;
+import xyz.hyzonia.rootengine.common.messaging.MessagingConstants;
+import xyz.hyzonia.rootengine.common.messaging.PacketFactory;
+import xyz.hyzonia.rootengine.common.messaging.impl.CommandForwardPacket;
+import xyz.hyzonia.rootengine.common.messaging.impl.HandshakePacket;
+import xyz.hyzonia.rootengine.common.messaging.impl.HandshakeResponsePacket;
+import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import xyz.hyzonia.rootengine.paper.listener.LPCListener;
 
 import java.nio.file.Path;

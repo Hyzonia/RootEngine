@@ -7,13 +7,13 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.velocitypowered.api.command.BrigadierCommand;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import xyz.hyzonia.rootengine.common.DiscordWebhookSender;
 import xyz.hyzonia.rootengine.common.Messages;
 import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 import xyz.hyzonia.rootengine.velocity.command.VelocityCommand;
 import xyz.hyzonia.rootengine.velocity.database.ReportDatabase;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextReplacementConfig;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

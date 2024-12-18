@@ -1,8 +1,8 @@
 package xyz.hyzonia.rootengine.velocity.listener;
 
 import com.velocitypowered.api.proxy.ProxyServer;
-import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 import org.slf4j.Logger;
+import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 
 public abstract class VelocityListener {
     private final String name;

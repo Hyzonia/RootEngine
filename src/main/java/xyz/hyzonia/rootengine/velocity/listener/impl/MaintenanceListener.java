@@ -26,7 +26,7 @@ public class MaintenanceListener extends EventListener<MaintenanceChangedEvent> 
                                           "content": "MESSAGE"
                                         }
                                         """.replaceAll(
-                                                "MESSAGE",
+                                        "MESSAGE",
                                         VelocityEngine.CONFIG.getMaintenanceMessage()
                                 )
                         );

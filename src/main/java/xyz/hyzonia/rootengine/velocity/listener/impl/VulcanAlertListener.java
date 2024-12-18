@@ -4,20 +4,14 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.PluginMessageEvent;
-import com.velocitypowered.api.event.connection.PostLoginEvent;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.ServerConnection;
-import org.bukkit.Server;
 import org.slf4j.Logger;
-import xyz.hyzonia.rootengine.common.Messages;
 import xyz.hyzonia.rootengine.velocity.VelocityEngine;
-import xyz.hyzonia.rootengine.velocity.database.PlayerDatabase;
 import xyz.hyzonia.rootengine.velocity.database.VulcanDatabase;
 import xyz.hyzonia.rootengine.velocity.listener.VelocityListener;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Objects;
 
 public class VulcanAlertListener extends VelocityListener {
 

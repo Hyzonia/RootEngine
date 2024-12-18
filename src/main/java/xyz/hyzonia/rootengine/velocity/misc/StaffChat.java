@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class StaffChat {
     public final ArrayList<Player> staffsWithChatEnabled; // if the staff can see and send staff messages
     public final ArrayList<Player> staffsWithChatToggled; // if all messages from the staff get sent to the staff chat
-    
+
     public StaffChat() {
         staffsWithChatEnabled = new ArrayList<>();
         staffsWithChatToggled = new ArrayList<>();

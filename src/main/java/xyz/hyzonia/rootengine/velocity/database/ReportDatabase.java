@@ -1,7 +1,7 @@
 package xyz.hyzonia.rootengine.velocity.database;
 
-import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 import org.slf4j.Logger;
+import xyz.hyzonia.rootengine.velocity.VelocityEngine;
 
 import java.sql.*;
 

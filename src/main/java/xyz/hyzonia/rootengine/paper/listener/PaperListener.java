@@ -1,9 +1,9 @@
 package xyz.hyzonia.rootengine.paper.listener;
 
-import xyz.hyzonia.rootengine.paper.PaperEngine;
 import org.bukkit.Server;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
+import xyz.hyzonia.rootengine.paper.PaperEngine;
 
 import java.util.logging.Logger;
 

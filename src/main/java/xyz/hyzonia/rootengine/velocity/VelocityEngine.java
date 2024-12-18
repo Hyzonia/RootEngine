@@ -16,7 +16,7 @@ import com.velocitypowered.api.proxy.server.RegisteredServer;
 import eu.kennytv.maintenance.api.MaintenanceProvider;
 import eu.kennytv.maintenance.api.event.MaintenanceChangedEvent;
 import eu.kennytv.maintenance.api.proxy.MaintenanceProxy;
-import org.bukkit.util.noise.PerlinOctaveGenerator;
+import org.slf4j.Logger;
 import xyz.hyzonia.rootengine.common.messaging.MessagingConstants;
 import xyz.hyzonia.rootengine.common.messaging.PacketFactory;
 import xyz.hyzonia.rootengine.common.messaging.impl.CommandForwardPacket;
@@ -32,7 +32,6 @@ import xyz.hyzonia.rootengine.velocity.database.VulcanDatabase;
 import xyz.hyzonia.rootengine.velocity.listener.impl.*;
 import xyz.hyzonia.rootengine.velocity.misc.BackendServer;
 import xyz.hyzonia.rootengine.velocity.misc.NickManager;
-import org.slf4j.Logger;
 import xyz.hyzonia.rootengine.velocity.misc.ServerBalancer;
 import xyz.hyzonia.rootengine.velocity.misc.StaffChat;
 
