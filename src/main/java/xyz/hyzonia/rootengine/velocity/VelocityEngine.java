@@ -164,7 +164,7 @@ public class VelocityEngine {
             // not s -> p
         });
 
-        PACKET_FACTORY.registerPacket("handshake_response", SyncPacket::new, syncPacket -> {
+        PACKET_FACTORY.registerPacket("sync", SyncPacket::new, syncPacket -> {
             BACKEND_SERVERS.get(PROXY_SERVER.getServer(syncPacket.getServerName()).get()).updateFromPacket(syncPacket);
         });
 

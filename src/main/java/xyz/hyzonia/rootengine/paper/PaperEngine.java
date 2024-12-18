@@ -87,7 +87,7 @@ public class PaperEngine extends JavaPlugin {
             );
         });
 
-        PACKET_FACTORY.registerPacket("handshake_response", SyncPacket::new, syncPacket -> {
+        PACKET_FACTORY.registerPacket("sync", SyncPacket::new, syncPacket -> {
             // not p -> s
         });
 
