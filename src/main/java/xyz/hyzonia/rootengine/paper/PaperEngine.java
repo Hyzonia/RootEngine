@@ -12,7 +12,7 @@ import xyz.hyzonia.rootengine.common.messaging.MessagingConstants;
 import xyz.hyzonia.rootengine.common.messaging.PacketFactory;
 import xyz.hyzonia.rootengine.common.messaging.impl.CommandForwardPacket;
 import xyz.hyzonia.rootengine.common.messaging.impl.HandshakePacket;
-import xyz.hyzonia.rootengine.common.messaging.impl.HandshakeResponsePacket;
+import xyz.hyzonia.rootengine.common.messaging.impl.SyncPacket;
 import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import xyz.hyzonia.rootengine.paper.listener.LPCListener;
 
@@ -57,15 +57,24 @@ public class PaperEngine extends JavaPlugin {
             getServer().getPlayer(handshakePacket.getPlayerUUID()).setDisplayName(handshakePacket.getPlayerNickname());
             getServer().getPlayer(handshakePacket.getPlayerUUID()).sendMessage(Messages.DISPLAY_NAME_CHANGED.replace("{nickname}", handshakePacket.getPlayerNickname()));
 
-            PACKET_FACTORY.encodeAndSend(
-                    new HandshakeResponsePacket(
-                            getServer().getUnsafe().getProtocolVersion(),
-                            handshakePacket.getServerName()
-                    ),
-                    getServer().getPlayer(
-                            handshakePacket.getPlayerUUID()
+            // Synchronize the server state with all proxies by absolutely bombarding it
+            // The bombarding part was a joke,
+            // we will later make a proxy identifier to send one packet to one proxy
+            // Or maybe use something like rabbit mq
+            getServer().getOnlinePlayers().forEach(player -> PACKET_FACTORY.encodeAndSend(
+                            new SyncPacket(
+                                    handshakePacket.getServerName(),
+                                    getServer().getUnsafe().getProtocolVersion(),
+                                    getServer().getOnlinePlayers().size(),
+                                    getServer().getMaxPlayers(),
+                                    getServer().getMotd(),
+                                    getServer().getServerIcon().getData(),
+                                    System.currentTimeMillis()
+                            ),
+                            player
                     )
             );
+
 
             getServer().broadcast(
                     Component.text("§b§l[+] {nickname}")
@@ -78,7 +87,7 @@ public class PaperEngine extends JavaPlugin {
             );
         });
 
-        PACKET_FACTORY.registerPacket("handshake_response", HandshakeResponsePacket::new, handshakeResponsePacket -> {
+        PACKET_FACTORY.registerPacket("handshake_response", SyncPacket::new, syncPacket -> {
             // not p -> s
         });
 

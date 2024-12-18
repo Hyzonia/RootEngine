@@ -21,7 +21,7 @@ import xyz.hyzonia.rootengine.common.messaging.MessagingConstants;
 import xyz.hyzonia.rootengine.common.messaging.PacketFactory;
 import xyz.hyzonia.rootengine.common.messaging.impl.CommandForwardPacket;
 import xyz.hyzonia.rootengine.common.messaging.impl.HandshakePacket;
-import xyz.hyzonia.rootengine.common.messaging.impl.HandshakeResponsePacket;
+import xyz.hyzonia.rootengine.common.messaging.impl.SyncPacket;
 import xyz.hyzonia.rootengine.common.messaging.impl.NickUpdatePacket;
 import xyz.hyzonia.rootengine.velocity.command.misc.NickCommand;
 import xyz.hyzonia.rootengine.velocity.command.misc.ReportCommand;
@@ -164,9 +164,8 @@ public class VelocityEngine {
             // not s -> p
         });
 
-        PACKET_FACTORY.registerPacket("handshake_response", HandshakeResponsePacket::new, handshakeResponsePacket -> {
-            BACKEND_SERVERS.get(PROXY_SERVER.getServer(handshakeResponsePacket.getServerName()).get()).protocolVersion = handshakeResponsePacket.getServerPVN();
-            LOGGER.debug("Backend server PVN: {}", BACKEND_SERVERS.get(PROXY_SERVER.getServer(handshakeResponsePacket.getServerName()).get()).protocolVersion);
+        PACKET_FACTORY.registerPacket("handshake_response", SyncPacket::new, syncPacket -> {
+            BACKEND_SERVERS.get(PROXY_SERVER.getServer(syncPacket.getServerName()).get()).updateFromPacket(syncPacket);
         });
 
         PACKET_FACTORY.registerPacket("nick_update", NickUpdatePacket::new, nickUpdatePacket -> {
