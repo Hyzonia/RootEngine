@@ -43,6 +43,7 @@ public class PlayerServerListener extends VelocityListener {
 
     @Subscribe
     public void onConnectionRequest(ServerPreConnectEvent event) {
+        if (!VelocityEngine.CONFIG.isBalancerEnabled()) return;
         if (VelocityEngine.SERVER_BALANCER.onRequest(event.getPlayer(), event.getOriginalServer().getServerInfo().getName()))
             event.setResult(ServerPreConnectEvent.ServerResult.denied());
         else
