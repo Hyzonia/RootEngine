@@ -25,8 +25,6 @@ public class PlayerServerListener extends VelocityListener {
 
     @Subscribe
     public void onPlayerDisconnect(KickedFromServerEvent event) {
-//        event.setResult(KickedFromServerEvent.Notify.create(Component.text("Kicked From Server")));
-//        event.setResult(KickedFromServerEvent.RedirectPlayer.create(this.proxy.getServer("hub").orElse("hub")));
         if (event.getServerKickReason().isPresent()) {
             Component reason = event.getServerKickReason().orElse(Component.text("Unknown"));
             event.setResult(KickedFromServerEvent.Notify.create(Messages.serverKickMessage
