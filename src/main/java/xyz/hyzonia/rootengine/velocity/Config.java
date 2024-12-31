@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// TODO: Reorder methods
 public class Config extends ConfigProvider {
     public Config(Path dataDirectory) {
         super("config_velocity.yml", "file-version", dataDirectory.toFile());
