@@ -33,6 +33,10 @@ public class Config extends ConfigProvider {
         return getFileConfig().getString(Route.fromString("database.password"));
     }
 
+    public boolean isReportEnabled() {
+        return getFileConfig().getBoolean(Route.fromString("report.enabled"));
+    }
+
     public Map<String, Map<String, String>> getReportTypes() {
         Map<String, Map<String, String>> types = new HashMap<>();
         getFileConfig().getSection(Route.fromString("report.types")).getKeys().forEach(type -> {
@@ -42,6 +46,10 @@ public class Config extends ConfigProvider {
         });
 
         return types;
+    }
+
+    public boolean isBalancerEnabled() {
+        return getFileConfig().getBoolean(Route.fromString("balancer.enabled"));
     }
 
     public Map<String, List<String>> getBalancer() {
@@ -63,12 +71,20 @@ public class Config extends ConfigProvider {
         return getFileConfig().getStringList(Route.fromString("self-send.servers"));
     }
 
+    public boolean isSelfSendEnabled() {
+        return getFileConfig().getBoolean(Route.fromString("self-send.enabled"));
+    }
+
     public boolean isMaintenanceHooked() {
         return getFileConfig().getBoolean(Route.fromString("maintenance-support.enabled"));
     }
 
     public String getMaintenanceWebhook() {
         return getFileConfig().getString(Route.fromString("maintenance-support.webhook"));
+    }
+
+    public boolean isMaintenanceEnabled() {
+        return getFileConfig().getBoolean(Route.fromString("maintenance.enabled"));
     }
 
     public String getMaintenanceMessage() {
@@ -81,5 +97,9 @@ public class Config extends ConfigProvider {
 
     public String getStaffChatWebhook() {
         return getFileConfig().getString(Route.fromString("staff-chat.webhook"));
+    }
+
+    public boolean isStaffChatEnabled() {
+        return getFileConfig().getBoolean(Route.fromString("staff-chat.enabled"));
     }
 }

@@ -7,11 +7,13 @@ database:
   password: ""
 
 balancer:
+  enabled: true
   hub:
     - "eu-hub-1"
     - "eu-hub-2"
 
 self-send:
+  enabled: true
   servers:
     - "hub"
     - "eu-crystal"
@@ -19,6 +21,7 @@ self-send:
     - "eu-practice"
 
 report:
+  enabled: true
   webhook: ""
   types:
     CHEATING:
@@ -53,12 +56,13 @@ report:
       exception: "None."
 
 maintenance-support:
-  enabled: false
+  enabled: true
   webhook: ""
   discord-message: "{server_name} is undergoing maintenance! ETA: {eta}."
 
 vulcan-alerts:
-  enabled: false
+  enabled: true
 
 staff-chat:
+  enabled: true
   webhook: ""
