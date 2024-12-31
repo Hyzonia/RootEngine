@@ -85,7 +85,7 @@ public class Config extends ConfigProvider {
     }
 
     public boolean isMaintenanceEnabled() {
-        return getFileConfig().getBoolean(Route.fromString("maintenance.enabled"));
+        return getFileConfig().getBoolean(Route.fromString("maintenance-support.enabled"));
     }
 
     public String getMaintenanceMessage() {
