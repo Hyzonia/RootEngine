@@ -23,6 +23,7 @@ public class StaffChatCommand extends VelocityCommand {
                 .requires(source ->
                         source.getPermissionValue("rootengine.staffchat") == Tristate.TRUE)
                 .executes(commandContext -> {
+                    if (!VelocityEngine.CONFIG.isStaffChatEnabled()) return SINGLE_SUCCESS;
                     if (!(commandContext.getSource() instanceof Player player)) {
                         commandContext.getSource().sendMessage(Messages.invalidSourceConsole);
                         return SINGLE_SUCCESS;
@@ -36,6 +37,7 @@ public class StaffChatCommand extends VelocityCommand {
                     return SINGLE_SUCCESS;
                 })
                 .then(RequiredArgumentBuilder.<CommandSource, String>argument("message", StringArgumentType.word()).executes(commandContext -> {
+                    if (!VelocityEngine.CONFIG.isStaffChatEnabled()) return SINGLE_SUCCESS;
                     VelocityEngine.STAFF_CHAT.broadcastStaffMessage(
                             commandContext.getSource() instanceof Player player ?
                                     Component.text(player.getUsername()) : Messages.consoleUsername,

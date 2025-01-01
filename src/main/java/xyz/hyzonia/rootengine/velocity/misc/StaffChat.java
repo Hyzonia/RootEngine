@@ -20,6 +20,7 @@ public class StaffChat {
     }
 
     public void broadcastStaffMessage(Component senderName, Component message) {
+        if (!VelocityEngine.CONFIG.isStaffChatEnabled()) return;
         Component component = Messages.staffMessage
                 .replaceText(TextReplacementConfig.builder()
                         .matchLiteral("{sender}")
@@ -42,6 +43,7 @@ public class StaffChat {
     }
 
     public void onUpdate() {
+        if (!VelocityEngine.CONFIG.isStaffChatEnabled()) return;
         staffsWithChatEnabled.forEach(player -> {
             if (!player.hasPermission("rootengine.staffchat"))
                 staffsWithChatEnabled.remove(player);

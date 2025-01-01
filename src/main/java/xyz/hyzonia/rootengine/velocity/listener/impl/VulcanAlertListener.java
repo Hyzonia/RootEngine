@@ -21,6 +21,7 @@ public class VulcanAlertListener extends VelocityListener {
 
     @Subscribe
     public void onPluginMessage(PluginMessageEvent event) {
+        if (!VelocityEngine.CONFIG.isVulcanSupportEnabled()) return;
         if (!event.getIdentifier().getId().equals("vulcan:bungee")) return;
         event.setResult(PluginMessageEvent.ForwardResult.handled());
         if (!(event.getSource() instanceof ServerConnection serverConnection)) return;

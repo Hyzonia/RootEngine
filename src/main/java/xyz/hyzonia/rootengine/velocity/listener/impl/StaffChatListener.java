@@ -15,6 +15,7 @@ public class StaffChatListener extends VelocityListener {
 
     @Subscribe
     public void onChat(PlayerChatEvent event) {
+        if (!VelocityEngine.CONFIG.isStaffChatEnabled()) return;
         if (event.getPlayer().hasPermission("rootengine.staffchat") && VelocityEngine.STAFF_CHAT.staffsWithChatToggled.contains(event.getPlayer())) {
             VelocityEngine.STAFF_CHAT.broadcastStaffMessage(Component.text(event.getPlayer().getUsername()), Component.text(event.getMessage()));
             event.setResult(PlayerChatEvent.ChatResult.denied());
